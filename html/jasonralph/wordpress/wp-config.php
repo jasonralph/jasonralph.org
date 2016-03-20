@@ -19,13 +19,13 @@ define('WP_CACHE', true); // Added by W3 Total Cache
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define('DB_NAME', '');
+define('DB_NAME', 'jasonralph');
 
 /** MySQL database username */
-define('DB_USER', '');
+define('DB_USER', 'jasonralph');
 
 /** MySQL database password */
-define('DB_PASSWORD', '');
+define('DB_PASSWORD', '$zenplex1');
 
 /** MySQL hostname */
 define('DB_HOST', 'localhost');
@@ -89,8 +89,20 @@ define('WP_DEBUG', false);
 if ( !defined('ABSPATH') )
 	define('ABSPATH', dirname(__FILE__) . '/');
 
+/** Added to fix admin page 20160229 */
+if ($_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')
+   $_SERVER['HTTPS']='on';
+
+
 /** Sets up WordPress vars and included files. */
 require_once(ABSPATH . 'wp-settings.php');
 
 
 define('FTP_CONTENT_DIR', '/var/www/html/jasonralph/wordpress/wp-content/');
+
+
+if ( isset( $_SERVER['HTTP_CF_VISITOR'] ) && strpos( $_SERVER['HTTP_CF_VISITOR'], 'https' ) !== false ) {
+        $_SERVER['HTTPS'] = 'on';
+}
+
+$_SERVER['SERVER_PORT'] = 443;
